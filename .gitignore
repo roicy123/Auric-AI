@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.py[cod]
+answers*.json
+runs/
+visible_key.json
+
+# Local debugging and intermediate outputs
+debug*.json
+extracted*.json
+smoke.json
+z3-conflict-test.json
+items_shift.json
+key_shift.json
+gold_shift.json

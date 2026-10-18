@@ -1,0 +1,2 @@
+# No third-party runtime dependencies: the system uses only the Python standard library.
+# Python 3.11 (developed and tested on 3.11; 3.9+ should work).

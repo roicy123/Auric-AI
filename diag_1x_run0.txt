@@ -1,0 +1,135 @@
+per gold op: n, accuracy
+  AT        n=  42 acc=0.81
+  BEFORE    n=  41 acc=0.83
+  BETWEEN   n= 148 acc=0.86
+  NEXT      n=  55 acc=0.80
+  NONE      n= 600 acc=0.98
+  NOT_AT    n=  50 acc=0.76
+  NOT_ON    n=  68 acc=0.97
+  ON        n=  40 acc=0.97
+  S_BEFORE  n=  93 acc=0.62
+-- mistakes where gold=AT (8), first 8:
+   B2-006 | Pretty sure Samuel will be in at 13:00.
+        gold=('AT', ('Samuel', '13:00'))  got=None
+   B2-011 | Ayesha is down for 11:00.
+        gold=('AT', ('Ayesha', '11:00'))  got=('NOT_AT', ('Ayesha', '11:00'))
+   B2-011 | Last I checked, Ayesha is down for 11:00.
+        gold=('AT', ('Ayesha', '11:00'))  got=('NOT_AT', ('Ayesha', '11:00'))
+   B2-022 | Tomas has been given the 13:00 slot.
+        gold=('AT', ('Tomas', '13:00'))  got=None
+   B2-022 | Priya's shift starts at 07:00.
+        gold=('AT', ('Priya', '07:00'))  got=None
+   B2-041 | Flagging again: To the best of my knowledge, Samuel is down for 07:00.
+        gold=('AT', ('Samuel', '07:00'))  got=None
+   B2-042 | Repeating for the record: Last I checked, Ingrid is down for 11:00.
+        gold=('AT', ('Ingrid', '11:00'))  got=('NOT_AT', ('Ingrid', '11:00'))
+   B2-047 | Pretty sure Nadia's shift starts at 13:00.
+        gold=('AT', ('Nadia', '13:00'))  got=None
+-- mistakes where gold=BEFORE (7), first 8:
+   B2-000 | Pretty sure Ayesha starts after Rohan has gone in.
+        gold=('BEFORE', ('Rohan', 'Ayesha'))  got=None
+   B2-008 | Last I checked, Rohan starts after Ingrid has gone in.
+        gold=('BEFORE', ('Ingrid', 'Rohan'))  got=None
+   B2-029 | To the best of my knowledge, Nadia starts after Tomas has gone in.
+        gold=('BEFORE', ('Tomas', 'Nadia'))  got=('BEFORE', ('Nadia', 'Tomas'))
+   B2-032 | Flagging again: Last I checked, Ingrid starts after Meera has gone in.
+        gold=('BEFORE', ('Meera', 'Ingrid'))  got=('BEFORE', ('Ingrid', 'Meera'))
+   B2-043 | Second mention in the log: I seem to remember that Ingrid starts after Meera has gone in.
+        gold=('BEFORE', ('Meera', 'Ingrid'))  got=None
+   B2-043 | I seem to remember that Daniel goes in ahead of Ingrid.
+        gold=('BEFORE', ('Daniel', 'Ingrid'))  got=None
+   B2-047 | Priya goes in ahead of Tomas.
+        gold=('BEFORE', ('Priya', 'Tomas'))  got=None
+-- mistakes where gold=BETWEEN (21), first 8:
+   B2-007 | Pretty sure of Nadia, Ingrid and Samuel, Nadia is the middle one.
+        gold=('BETWEEN', ('Nadia', 'Ingrid', 'Samuel'))  got=None
+   B2-007 | Of Ayesha, Nadia and Ingrid, Ayesha is the middle one.
+        gold=('BETWEEN', ('Ayesha', 'Ingrid', 'Nadia'))  got=None
+   B2-007 | Last I checked, of Nadia, Tomas and Samuel, Nadia is the middle one.
+        gold=('BETWEEN', ('Nadia', 'Samuel', 'Tomas'))  got=None
+   B2-007 | Of Ingrid, Tomas and Samuel, Ingrid is the middle one.
+        gold=('BETWEEN', ('Ingrid', 'Samuel', 'Tomas'))  got=None
+   B2-013 | Pretty sure of Nadia, Ayesha and Daniel, Nadia is the middle one.
+        gold=('BETWEEN', ('Nadia', 'Ayesha', 'Daniel'))  got=None
+   B2-015 | Unless the sheet is stale, Daniel and Meera bracket Samuel, one on each side.
+        gold=('BETWEEN', ('Samuel', 'Daniel', 'Meera'))  got=None
+   B2-015 | Repeating for the record: I seem to remember that Lukas falls in the gap between Daniel and Samuel, whichever order they go.
+        gold=('BETWEEN', ('Lukas', 'Daniel', 'Samuel'))  got=None
+   B2-022 | Ingrid and Priya bracket Tomas, one on each side.
+        gold=('BETWEEN', ('Tomas', 'Ingrid', 'Priya'))  got=None
+-- mistakes where gold=NEXT (11), first 8:
+   B2-000 | To the best of my knowledge, Meera comes in straight after Samuel.
+        gold=('NEXT', ('Samuel', 'Meera'))  got=('NEXT', ('Meera', 'Samuel'))
+   B2-011 | Repeating for the record: Last I checked, Meera follows Nadia with nothing in between.
+        gold=('NEXT', ('Nadia', 'Meera'))  got=('NEXT', ('Meera', 'Nadia'))
+   B2-011 | To the best of my knowledge, Meera, and right behind them Ayesha.
+        gold=('NEXT', ('Meera', 'Ayesha'))  got=None
+   B2-033 | I seem to remember that Lukas, and right behind them Ingrid.
+        gold=('NEXT', ('Lukas', 'Ingrid'))  got=None
+   B2-034 | If I'm reading the sheet right, Samuel, and right behind them Ingrid.
+        gold=('NEXT', ('Samuel', 'Ingrid'))  got=None
+   B2-035 | To the best of my knowledge, Priya follows Rohan with nothing in between.
+        gold=('NEXT', ('Rohan', 'Priya'))  got=('NEXT', ('Priya', 'Rohan'))
+   B2-037 | Pretty sure Priya, and right behind them Lukas.
+        gold=('NEXT', ('Priya', 'Lukas'))  got=None
+   B2-056 | Daniel, and right behind them Nadia.
+        gold=('NEXT', ('Daniel', 'Nadia'))  got=None
+-- mistakes where gold=NONE (13), first 8:
+   B2-004 | Ingrid was moved off packing last year.
+        gold=None  got=('NOT_ON', ('Ingrid', 'packing'))
+   B2-005 | Unless the sheet is stale, Tomas was moved off packing last year.
+        gold=None  got=('NOT_ON', ('Tomas', 'packing'))
+   B2-012 | Pretty sure Nadia was moved off packing last year.
+        gold=None  got=('NOT_ON', ('Nadia', 'packing'))
+   B2-024 | It was suggested that Meera might suit intake; nobody followed up.
+        gold=None  got=('ON', ('Meera', 'intake'))
+   B2-025 | Ingrid was moved off calibration last year.
+        gold=None  got=('NOT_ON', ('Ingrid', 'calibration'))
+   B2-034 | To the best of my knowledge, Meera was moved off calibration last year.
+        gold=None  got=('NOT_ON', ('Meera', 'calibration'))
+   B2-039 | Last I checked, Tomas was moved off calibration last year.
+        gold=None  got=('NOT_ON', ('Tomas', 'calibration'))
+   B2-039 | Priya was moved off calibration last year.
+        gold=None  got=('NOT_ON', ('Priya', 'calibration'))
+-- mistakes where gold=NOT_AT (12), first 8:
+   B2-005 | Pretty sure nothing for Nadia at 09:00 - off the board.
+        gold=('NOT_AT', ('Nadia', '09:00'))  got=None
+   B2-006 | If I'm reading the sheet right, Priya is off the board for the 09:00 slot.
+        gold=('NOT_AT', ('Priya', '09:00'))  got=None
+   B2-009 | Pretty sure nothing for Priya at 13:00 - off the board.
+        gold=('NOT_AT', ('Priya', '13:00'))  got=None
+   B2-013 | Unless the sheet is stale, nothing for Tomas at 09:00 - off the board.
+        gold=('NOT_AT', ('Tomas', '09:00'))  got=None
+   B2-015 | Last I checked, nothing for Meera at 07:00 - off the board.
+        gold=('NOT_AT', ('Meera', '07:00'))  got=None
+   B2-022 | Ayesha cannot work 09:00.
+        gold=('NOT_AT', ('Ayesha', '09:00'))  got=None
+   B2-028 | To the best of my knowledge, nothing for Lukas at 15:00 - off the board.
+        gold=('NOT_AT', ('Lukas', '15:00'))  got=None
+   B2-038 | Unless the sheet is stale, Rohan is off the board for the 09:00 slot.
+        gold=('NOT_AT', ('Rohan', '09:00'))  got=None
+-- mistakes where gold=NOT_ON (2), first 8:
+   B2-007 | Unless the sheet is stale, Nadia is not covering packing.
+        gold=('NOT_ON', ('Nadia', 'packing'))  got=None
+   B2-022 | Unless the sheet is stale, Priya is not covering calibration.
+        gold=('NOT_ON', ('Priya', 'calibration'))  got=None
+-- mistakes where gold=ON (1), first 8:
+   B2-050 | Second mention in the log: Pretty sure Rohan is running calibration.
+        gold=('ON', ('Rohan', 'calibration'))  got=None
+-- mistakes where gold=S_BEFORE (35), first 8:
+   B2-001 | To the best of my knowledge, Tomas comes after the packing person.
+        gold=('S_BEFORE', ('packing', 'Tomas'))  got=None
+   B2-004 | Pretty sure Rohan comes after the packing person.
+        gold=('S_BEFORE', ('packing', 'Rohan'))  got=None
+   B2-005 | Priya comes after the packing person.
+        gold=('S_BEFORE', ('packing', 'Priya'))  got=None
+   B2-005 | Pretty sure packing is staffed ahead of Priya's start.
+        gold=('S_BEFORE', ('packing', 'Priya'))  got=None
+   B2-006 | Pretty sure packing is staffed ahead of Nadia's start.
+        gold=('S_BEFORE', ('packing', 'Nadia'))  got=None
+   B2-007 | To the best of my knowledge, packing is staffed ahead of Ayesha's start.
+        gold=('S_BEFORE', ('packing', 'Ayesha'))  got=None
+   B2-007 | Pretty sure whoever is running calibration goes in before Ingrid.
+        gold=('S_BEFORE', ('calibration', 'Ingrid'))  got=None
+   B2-007 | Unless the sheet is stale, Tomas comes after the intake person.
+        gold=('S_BEFORE', ('intake', 'Tomas'))  got=None
